@@ -39,6 +39,7 @@ try:
 
 if API_KEY is None:
     st.error("Weather API key is missing! Add it to environment variables or `.streamlit/secrets.toml` (local) or Streamlit Cloud settings.")
+    st.error("Weather API key is missing! Add it to environment variables or `.streamlit/secrets.toml` (local) or Streamlit Cloud settings.")
     API_KEY = ""  # Assign an empty string to prevent further errors
     st.error("Weather API key is missing! Add it to environment variables or `.streamlit/secrets.toml` (local) or Streamlit Cloud settings.")
     API_KEY = ""
@@ -191,4 +192,3 @@ if file:
     report_data = pd.DataFrame({"Actual": y_true, "Predicted": y_pred})
     report_data.to_csv(report_buffer, index=False)
     st.download_button("Download Report as CSV", report_buffer, file_name="forecast_report.csv", mime="text/csv")
-
