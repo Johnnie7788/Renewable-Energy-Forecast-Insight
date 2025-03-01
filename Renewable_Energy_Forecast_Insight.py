@@ -34,16 +34,15 @@ import os
 try:
     API_KEY = st.secrets["WEATHER_API_KEY"]
     if API_KEY:
-        st.success("✅ Weather API key successfully retrieved!")
-    else:
-        st.error("❌ Weather API key is empty! Please add it to your secrets.")
-except KeyError:
-    st.error("❌ Weather API key is missing! Add it to `.streamlit/secrets.toml` (local) or Streamlit Cloud settings.")
-
-if not API_KEY:
-    st.error("Weather API key is missing! Add it to environment variables or `.streamlit/secrets.toml` (local) or Streamlit Cloud settings.")
+        
+    
 
 if API_KEY is None:
+    st.error("Weather API key is missing! Add it to environment variables or `.streamlit/secrets.toml` (local) or Streamlit Cloud settings.")
+    API_KEY = ""  # Assign an empty string to prevent further errors
+    st.error("Weather API key is missing! Add it to environment variables or `.streamlit/secrets.toml` (local) or Streamlit Cloud settings.")
+    API_KEY = ""
+    st.error("Weather API key is missing! Add it to environment variables or `.streamlit/secrets.toml` (local) or Streamlit Cloud settings.")
     st.error("Weather API key is missing! Add it to `.streamlit/secrets.toml` (local) or Streamlit Cloud settings.")
     API_KEY = st.secrets["WEATHER_API_KEY"]
 else:
@@ -109,7 +108,13 @@ if st.sidebar.button("Get Weather Data") and API_KEY:
     url = f"{BASE_URL}?key={API_KEY}&q={city}&aqi=no"
     response = requests.get(url)
     
-   
+    
+            f"🌍 **City:** {city}  \n"
+            f"🌡️ **Temperature:** {temp_c}°C  \n"
+            f"💨 **Wind Speed:** {wind_speed_mps} m/s"
+        )
+    else:
+        st.sidebar.error("Invalid city or API issue.")
 
 # --- Load Dataset ---
 if file:
