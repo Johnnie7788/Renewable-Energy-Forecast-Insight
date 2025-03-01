@@ -31,7 +31,14 @@ file = st.sidebar.file_uploader("Upload CSV File", type=["csv"])
 API_KEY = None
 import os
 
-API_KEY = st.secrets["WEATHER_API_KEY"]
+try:
+    API_KEY = st.secrets["WEATHER_API_KEY"]
+    if API_KEY:
+        st.success("✅ Weather API key successfully retrieved!")
+    else:
+        st.error("❌ Weather API key is empty! Please add it to your secrets.")
+except KeyError:
+    st.error("❌ Weather API key is missing! Add it to `.streamlit/secrets.toml` (local) or Streamlit Cloud settings.")
 
 if not API_KEY:
     st.error("Weather API key is missing! Add it to environment variables or `.streamlit/secrets.toml` (local) or Streamlit Cloud settings.")
