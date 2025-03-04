@@ -1,9 +1,0 @@
-streamlit
-pandas
-numpy
-requests
-plotly
-matplotlib
-scikit-learn
-xgboost
-python-dotenv
